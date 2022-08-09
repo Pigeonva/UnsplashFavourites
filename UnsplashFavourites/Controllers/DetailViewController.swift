@@ -8,22 +8,56 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        view.backgroundColor = .white
+        view.addSubview(imageView)
+        setConstraints()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setConstraints() {
+        
+        NSLayoutConstraint(item: imageView,
+                           attribute: .bottom,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .bottom,
+                           multiplier: 1,
+                           constant: -view.frame.height/3).isActive = true
+        
+        NSLayoutConstraint(item: imageView,
+                           attribute: .trailing,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .trailing,
+                           multiplier: 1,
+                           constant: -20).isActive = true
+        
+        NSLayoutConstraint(item: imageView,
+                           attribute: .leading,
+                           relatedBy: .equal,
+                           toItem: view,
+                           attribute: .leading,
+                           multiplier: 1,
+                           constant: 20).isActive = true
+        
+        NSLayoutConstraint(item: imageView,
+                           attribute: .height,
+                           relatedBy: .equal,
+                           toItem: nil,
+                           attribute: .notAnAttribute,
+                           multiplier: 1,
+                           constant: view.frame.width-40).isActive = true
     }
-    */
-
 }

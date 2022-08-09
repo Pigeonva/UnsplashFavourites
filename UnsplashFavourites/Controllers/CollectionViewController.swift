@@ -26,6 +26,8 @@ class CollectionViewController: UICollectionViewController {
         setupNavigationBar()
     }
     
+    //MARK: - CreateUI
+    
     func setupCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
@@ -97,7 +99,6 @@ extension CollectionViewController: UISearchControllerDelegate, UISearchBarDeleg
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Hello")
         
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { _ in
             self.networkDataFetcher.fetchImages(searchTerm: searchText) {[weak self] (photoData) in
@@ -131,7 +132,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: - didSelectItemAt
+//MARK: - Pass data to DetailViewController
 
 extension CollectionViewController {
     
@@ -139,12 +140,10 @@ extension CollectionViewController {
         
         let cell = collectionView.cellForItem(at: indexPath) as! CustomCollectionViewCell
         guard let image = cell.photoImageView.image else {return}
-        
+        let width = photos[indexPath.item].width
+        print(width)
         let detailVC = DetailViewController()
-        
-        //        detailVC.image = image
-        //        let navVC = UINavigationController(rootViewController: detailVC)
-        //        navVC.modalPresentationStyle = .fullScreen
-        //        present(navVC, animated: true, completion: nil)
+        detailVC.imageView.image = image
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
