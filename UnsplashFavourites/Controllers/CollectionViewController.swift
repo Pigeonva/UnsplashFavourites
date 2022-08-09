@@ -19,8 +19,6 @@ class CollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = UIColor(named: K.collectionBackgroundColor)
-        
         setupSearchBar()
         setupCollectionView()
         setupNavigationBar()
@@ -31,24 +29,18 @@ class CollectionViewController: UICollectionViewController {
     func setupCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
-        
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 1
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: (view.frame.size.width/3)-4,
                                  height: (view.frame.size.width/3)-4)
-        
-        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         guard let collectionView = collectionView else {return}
-        
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: K.identifierForCell)
         collectionView.dataSource = self
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.frame = view.bounds
-        
         collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         collectionView.contentInsetAdjustmentBehavior = .automatic
     }
@@ -56,8 +48,6 @@ class CollectionViewController: UICollectionViewController {
     func setupSearchBar() {
         
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
@@ -91,12 +81,7 @@ class CollectionViewController: UICollectionViewController {
 
 //MARK: - UISearchBarDelegate
 
-extension CollectionViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        print("Updating")
-    }
-    
+extension CollectionViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -141,9 +126,11 @@ extension CollectionViewController {
         let cell = collectionView.cellForItem(at: indexPath) as! CustomCollectionViewCell
         guard let image = cell.photoImageView.image else {return}
         let width = photos[indexPath.item].width
-        print(width)
         let detailVC = DetailViewController()
         detailVC.imageView.image = image
-        navigationController?.pushViewController(detailVC, animated: true)
+        detailVC.modalPresentationStyle = .fullScreen
+        detailVC.navigationItem.hidesBackButton = false
+        present(detailVC, animated: true)
+        
     }
 }
