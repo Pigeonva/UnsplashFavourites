@@ -27,6 +27,13 @@ class NetworkService {
             task.resume()
     }
     
+    func request(id: String, completion: @escaping (Data?, Error?) -> Void) {
+        
+            guard let url = URL(string: "https://api.unsplash.com/photos/\(id)?client_id=k0v-ObP7tdZ4H-ualcguGwdDX_asIBCQDvmUuMbG2Ek") else {return}
+            let task = createDataTsk(from: url, completion: completion)
+            task.resume()
+    }
+    
     private func prepareHeader()->[String:String]? {
         
         var headers = [String:String]()

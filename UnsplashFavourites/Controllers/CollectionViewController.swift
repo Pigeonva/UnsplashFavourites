@@ -13,7 +13,6 @@ class CollectionViewController: UICollectionViewController {
     var timer: Timer?
     var networkDataFetcher = NetworkDataFetcher()
     var photos = [UnsplashPhoto]()
-//    var photosTwo = [RandomPhotoDataElement]()
     let itemPerRow: CGFloat = 2
     let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     
@@ -104,7 +103,7 @@ extension CollectionViewController: UISearchBarDelegate {
     
     func getRandomPhotos() {
         
-        self.networkDataFetcher.fetchRandomImages() {[weak self] (randomPhotoData) in
+        self.networkDataFetcher.fetchImages(){[weak self] (randomPhotoData) in
             guard let fetchedPhotos = randomPhotoData else {return}
             self?.photos = fetchedPhotos
             self?.collectionView?.reloadData()
@@ -117,6 +116,7 @@ extension CollectionViewController: UISearchBarDelegate {
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         let photo = photos[indexPath.item]
         let paddingSpace = sectionInserts.left * (itemPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
@@ -126,10 +126,12 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         return sectionInserts
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
         return sectionInserts.left
     }
 }
@@ -142,11 +144,11 @@ extension CollectionViewController {
         
         let cell = collectionView.cellForItem(at: indexPath) as! CustomCollectionViewCell
         guard let image = cell.photoImageView.image else {return}
-        let width = photos[indexPath.item].width
+        let id = photos[indexPath.item].id
         let detailVC = DetailViewController()
         detailVC.imageView.image = image
+        detailVC.id = id
         detailVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(detailVC, animated: true)
-        
     }
 }

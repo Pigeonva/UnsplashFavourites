@@ -9,6 +9,9 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    var networkDataFetcher = NetworkDataFetcher()
+    var id = String()
+    
     //MARK: - Create instances
     
     let imageView: UIImageView = {
@@ -56,7 +59,7 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.text = "downloads"
+//        label.text = "downloads"
         
         return label
     }()
@@ -95,12 +98,38 @@ class DetailViewController: UIViewController {
         secondStackView.addArrangedSubview(firstStackView)
         view.addSubview(secondStackView)
         setConstraints()
+        
+        networkDataFetcher.fetchImages(id: id) { infoData in
+            
+            guard let fetchedInfo = infoData else {return}
+            self.downloads.text = "Downloads: \(String(fetchedInfo.downloads))"
+            self.authorName.text = "by \(fetchedInfo.user.name)"
+            self.location.text = fetchedInfo.location.name ?? "Somewhere in the Earth"
+            let date = fetchedInfo.createdAt
+            self.creatingDate.text = self.createCorrectDateFormat(dateJSON: date)
+        }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         navigationController?.popViewController(animated: true)
+    }
+    
+    //MARK: - CreateCorrectDateFormat
+    
+    func createCorrectDateFormat(dateJSON: String) -> String {
+
+        let dateFormatter = DateFormatter()
+        let tempLocale = dateFormatter.locale
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: dateJSON)!
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        dateFormatter.locale = tempLocale
+        let dateString = dateFormatter.string(from: date)
+        
+        return dateString
     }
     
     //MARK: - Setting Constraints
