@@ -13,6 +13,7 @@ class CollectionViewController: UICollectionViewController {
     var timer: Timer?
     var networkDataFetcher = NetworkDataFetcher()
     var photos = [UnsplashPhoto]()
+//    var photosTwo = [RandomPhotoDataElement]()
     let itemPerRow: CGFloat = 2
     let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     
@@ -21,6 +22,7 @@ class CollectionViewController: UICollectionViewController {
         
         setupSearchBar()
         setupCollectionView()
+        getRandomPhotos()
         setupNavigationBar()
         
         definesPresentationContext = true
@@ -98,6 +100,15 @@ extension CollectionViewController: UISearchBarDelegate {
                 self?.collectionView?.reloadData()
             }
         })
+    }
+    
+    func getRandomPhotos() {
+        
+        self.networkDataFetcher.fetchRandomImages() {[weak self] (randomPhotoData) in
+            guard let fetchedPhotos = randomPhotoData else {return}
+            self?.photos = fetchedPhotos
+            self?.collectionView?.reloadData()
+        }
     }
 }
 

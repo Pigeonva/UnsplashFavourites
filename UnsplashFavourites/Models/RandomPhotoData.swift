@@ -1,20 +1,14 @@
 //
-//  PhotoCollection.swift
+//  RandomPhotoData.swift
 //  UnsplashFavourites
 //
-//  Created by Артур Фомин on 07.08.2022.
+//  Created by Артур Фомин on 10.08.2022.
 //
 
 import Foundation
-import UIKit
 
-struct PhotoData: Codable {
+struct RandomPhotoDataElement: Codable {
     
-    var results: [UnsplashPhoto]
-    
-}
-
-struct UnsplashPhoto: Codable {
     let width: Int
     let height: Int
     let urls: [URLKing.RawValue:String]
@@ -28,4 +22,4 @@ struct UnsplashPhoto: Codable {
     }
 }
 
-typealias RandomPhotoData = [UnsplashPhoto]
+//typealias RandomPhotoData = [RandomPhotoDataElement]

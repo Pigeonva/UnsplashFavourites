@@ -24,6 +24,19 @@ class NetworkDataFetcher {
         }
     }
     
+    func fetchRandomImages(completion: @escaping ([UnsplashPhoto]?)->()) {
+        
+        networkService.request() { data, error in
+            if let error = error {
+                print("Error recieved requesting data: \(error.localizedDescription)")
+                completion(nil)
+            }
+            
+            let decode = self.decodeJSON(type: [UnsplashPhoto].self, from: data)
+            completion(decode)
+        }
+    }
+    
     func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {
         
         let decoder = JSONDecoder()

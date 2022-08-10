@@ -19,11 +19,4 @@ class TableViewController: UITableViewController {
         
         
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        
-////        detailVC.navigationController?.popViewController(animated: true)
-//        detailVC.dismiss(animated: true, completion: nil)
-//    }
 }
