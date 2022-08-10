@@ -96,6 +96,12 @@ class DetailViewController: UIViewController {
         view.addSubview(secondStackView)
         setConstraints()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        navigationController?.popViewController(animated: true)
+    }
     
     //MARK: - Setting Constraints
     

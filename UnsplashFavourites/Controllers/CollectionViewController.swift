@@ -22,8 +22,14 @@ class CollectionViewController: UICollectionViewController {
         setupSearchBar()
         setupCollectionView()
         setupNavigationBar()
+        
+        definesPresentationContext = true
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        
+    }
     //MARK: - CreateUI
     
     func setupCollectionView() {
@@ -129,8 +135,7 @@ extension CollectionViewController {
         let detailVC = DetailViewController()
         detailVC.imageView.image = image
         detailVC.modalPresentationStyle = .fullScreen
-        detailVC.navigationItem.hidesBackButton = false
-        present(detailVC, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
         
     }
 }
