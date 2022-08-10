@@ -11,33 +11,33 @@ class NetworkService {
     
     func request(searchTerm: String, completion: @escaping (Data?, Error?) -> Void) {
         
-            let parameters = self.prepareParametrs(searchTerm: searchTerm)
-            let url = self.url(params: parameters)
-            var request = URLRequest(url: url)
-            request.allHTTPHeaderFields = prepareHeader()
-            request.httpMethod = "get"
-            let task = createDataTsk(from: request, completion: completion)
-            task.resume()
+        let parameters = self.prepareParametrs(searchTerm: searchTerm)
+        let url = self.url(params: parameters)
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = prepareHeader()
+        request.httpMethod = "get"
+        let task = createDataTsk(from: request, completion: completion)
+        task.resume()
     }
     
     func request(completion: @escaping (Data?, Error?) -> Void) {
         
-            guard let url = URL(string: "https://api.unsplash.com/photos/random?client_id=k0v-ObP7tdZ4H-ualcguGwdDX_asIBCQDvmUuMbG2Ek&count=30") else {return}
-            let task = createDataTsk(from: url, completion: completion)
-            task.resume()
+        guard let url = URL(string: "https://api.unsplash.com/photos/random?client_id=\(K.accessKey)&count=30") else {return}
+        let task = createDataTsk(from: url, completion: completion)
+        task.resume()
     }
     
     func request(id: String, completion: @escaping (Data?, Error?) -> Void) {
         
-            guard let url = URL(string: "https://api.unsplash.com/photos/\(id)?client_id=k0v-ObP7tdZ4H-ualcguGwdDX_asIBCQDvmUuMbG2Ek") else {return}
-            let task = createDataTsk(from: url, completion: completion)
-            task.resume()
+        guard let url = URL(string: "https://api.unsplash.com/photos/\(id)?client_id=\(K.accessKey)") else {return}
+        let task = createDataTsk(from: url, completion: completion)
+        task.resume()
     }
     
     private func prepareHeader()->[String:String]? {
         
         var headers = [String:String]()
-        headers["Authorization"] = "Client-ID k0v-ObP7tdZ4H-ualcguGwdDX_asIBCQDvmUuMbG2Ek"
+        headers["Authorization"] = "Client-ID \(K.accessKey)"
         return headers
     }
     

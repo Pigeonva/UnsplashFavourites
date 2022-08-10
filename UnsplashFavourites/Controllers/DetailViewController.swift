@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.text = "name"
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -39,7 +39,7 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.text = "date"
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -49,7 +49,7 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.text = "location"
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -59,7 +59,7 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-//        label.text = "downloads"
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -89,18 +89,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
-        firstStackView.addArrangedSubview(authorName)
-        firstStackView.addArrangedSubview(creatingDate)
-        firstStackView.addArrangedSubview(location)
-        firstStackView.addArrangedSubview(downloads)
-        secondStackView.addArrangedSubview(imageView)
-        secondStackView.addArrangedSubview(firstStackView)
-        view.addSubview(secondStackView)
+        setupNavigationBar()
+        setupUserInterface()
         setConstraints()
-        
         networkDataFetcher.fetchImages(id: id) { infoData in
-            
             guard let fetchedInfo = infoData else {return}
             self.downloads.text = "Downloads: \(String(fetchedInfo.downloads))"
             self.authorName.text = "by \(fetchedInfo.user.name)"
@@ -112,14 +104,37 @@ class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func savePressed() {
+        
+        print("Save button pressed!!!")
+    }
+    
+    private func setupNavigationBar() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePressed))
+        navigationController?.navigationBar.tintColor = .black
+    }
+    
+    private func setupUserInterface() {
+        
+        view.backgroundColor = .white
+        firstStackView.addArrangedSubview(authorName)
+        firstStackView.addArrangedSubview(creatingDate)
+        firstStackView.addArrangedSubview(location)
+        firstStackView.addArrangedSubview(downloads)
+        secondStackView.addArrangedSubview(imageView)
+        secondStackView.addArrangedSubview(firstStackView)
+        view.addSubview(secondStackView)
     }
     
     //MARK: - CreateCorrectDateFormat
     
-    func createCorrectDateFormat(dateJSON: String) -> String {
-
+    private func createCorrectDateFormat(dateJSON: String) -> String {
+        
         let dateFormatter = DateFormatter()
         let tempLocale = dateFormatter.locale
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -134,7 +149,7 @@ class DetailViewController: UIViewController {
     
     //MARK: - Setting Constraints
     
-    func setConstraints() {
+    private func setConstraints() {
         
         NSLayoutConstraint(item: secondStackView,
                            attribute: .top,

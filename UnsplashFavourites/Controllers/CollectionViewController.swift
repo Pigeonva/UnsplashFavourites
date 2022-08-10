@@ -23,7 +23,6 @@ class CollectionViewController: UICollectionViewController {
         setupCollectionView()
         getRandomPhotos()
         setupNavigationBar()
-        
         definesPresentationContext = true
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -33,7 +32,7 @@ class CollectionViewController: UICollectionViewController {
     }
     //MARK: - CreateUI
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 5
@@ -52,7 +51,7 @@ class CollectionViewController: UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .automatic
     }
     
-    func setupSearchBar() {
+    private func setupSearchBar() {
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
@@ -62,7 +61,7 @@ class CollectionViewController: UICollectionViewController {
         navigationItem.titleView = searchController.searchBar
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         
         let label = UILabel()
         label.text = "Unsplash"
@@ -101,7 +100,7 @@ extension CollectionViewController: UISearchBarDelegate {
         })
     }
     
-    func getRandomPhotos() {
+    private func getRandomPhotos() {
         
         self.networkDataFetcher.fetchImages(){[weak self] (randomPhotoData) in
             guard let fetchedPhotos = randomPhotoData else {return}
