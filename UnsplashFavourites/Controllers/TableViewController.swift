@@ -14,13 +14,13 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        view.backgroundColor = UIColor(named: K.tableBackgroundColor)
         
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: K.identifierForTableCell)
+        tableView.rowHeight = 120
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        1
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

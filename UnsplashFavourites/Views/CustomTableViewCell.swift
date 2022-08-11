@@ -15,6 +15,7 @@ class CustomTableViewCell: UITableViewCell {
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .black
+        imageView.layer.cornerRadius = 5
         return imageView
     }()
     
@@ -22,7 +23,8 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.text = "Name"
         
@@ -34,6 +36,7 @@ class CustomTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.text = "Location"
         
@@ -44,7 +47,7 @@ class CustomTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.spacing = 5.0
+        stack.spacing = 10.0
         stack.alignment = .trailing
         stack.distribution = .fillEqually
         
@@ -65,6 +68,8 @@ class CustomTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        setupUserInterface()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -83,14 +88,14 @@ class CustomTableViewCell: UITableViewCell {
     
     private func setupConstraints() {
         
-        tableImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        tableImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        tableImageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        tableImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         locationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         secondStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         secondStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        secondStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        secondStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        secondStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+        secondStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
     }
 
 }
