@@ -8,16 +8,89 @@
 import UIKit
 
 class CustomTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    let tableImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints =  false
+        imageView.backgroundColor = .clear
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .black
+        return imageView
+    }()
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Name"
+        
+        return label
+    }()
+    
+    let locationLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Location"
+        
+        return label
+    }()
+    
+    let firstStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 5.0
+        stack.alignment = .trailing
+        stack.distribution = .fillEqually
+        
+        return stack
+    }()
+    
+    let secondStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = 5.0
+        stack.alignment = .trailing
+        stack.distribution = .fillProportionally
+        
+        return stack
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUserInterface() {
+        
+        firstStackView.addArrangedSubview(nameLabel)
+        firstStackView.addArrangedSubview(locationLabel)
+        secondStackView.addArrangedSubview(tableImageView)
+        secondStackView.addArrangedSubview(firstStackView)
+        self.contentView.addSubview(secondStackView)
+    }
+    
+    private func setupConstraints() {
+        
+        tableImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        tableImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        locationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        secondStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        secondStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        secondStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        secondStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
 
 }

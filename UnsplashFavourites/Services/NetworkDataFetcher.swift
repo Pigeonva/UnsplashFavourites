@@ -18,7 +18,6 @@ class NetworkDataFetcher {
                 print("Error recieved requesting data: \(error.localizedDescription)")
                 completion(nil)
             }
-            
             let decode = self.decodeJSON(type: PhotoData.self, from: data)
             completion(decode)
         }
@@ -31,7 +30,6 @@ class NetworkDataFetcher {
                 print("Error recieved requesting data: \(error.localizedDescription)")
                 completion(nil)
             }
-            
             let decode = self.decodeJSON(type: [UnsplashPhoto].self, from: data)
             completion(decode)
         }
@@ -44,7 +42,6 @@ class NetworkDataFetcher {
                 print("Error recieved requesting data: \(error.localizedDescription)")
                 completion(nil)
             }
-            
             let decode = self.decodeJSON(type: InfoData.self, from: data)
             completion(decode)
         }
@@ -54,7 +51,6 @@ class NetworkDataFetcher {
         
         let decoder = JSONDecoder()
         guard let data = from else {return nil}
-        
         do{
             let objects = try decoder.decode(type.self, from: data)
             return objects
