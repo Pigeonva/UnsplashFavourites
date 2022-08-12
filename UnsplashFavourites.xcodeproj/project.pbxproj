@@ -21,6 +21,7 @@
 		350F904728A002B00033DE79 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F904628A002B00033DE79 /* NetworkDataFetcher.swift */; };
 		350F909728A28E250033DE79 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F909628A28E250033DE79 /* DetailViewController.swift */; };
 		350F909B28A3EDFD0033DE79 /* InfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F909A28A3EDFD0033DE79 /* InfoData.swift */; };
+		350F90C028A64BFA0033DE79 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 350F90BE28A64BF90033DE79 /* DataModel.xcdatamodeld */; };
 		6F1E9AD556B01FF4ED55DC6C /* Pods_UnsplashFavourites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D7EAE7816D50CF95A0AC95 /* Pods_UnsplashFavourites.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		350F904628A002B00033DE79 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		350F909628A28E250033DE79 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		350F909A28A3EDFD0033DE79 /* InfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoData.swift; sourceTree = "<group>"; };
+		350F90BF28A64BFA0033DE79 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		59142F1ACCAB0DD24E01CD72 /* Pods-UnsplashFavourites.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashFavourites.release.xcconfig"; path = "Target Support Files/Pods-UnsplashFavourites/Pods-UnsplashFavourites.release.xcconfig"; sourceTree = "<group>"; };
 		C6DCAC5A504E424488D939BE /* Pods-UnsplashFavourites.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashFavourites.debug.xcconfig"; path = "Target Support Files/Pods-UnsplashFavourites/Pods-UnsplashFavourites.debug.xcconfig"; sourceTree = "<group>"; };
 		D9D7EAE7816D50CF95A0AC95 /* Pods_UnsplashFavourites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnsplashFavourites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 			children = (
 				350F9035289FBF110033DE79 /* PhotoData.swift */,
 				350F909A28A3EDFD0033DE79 /* InfoData.swift */,
+				350F90BE28A64BF90033DE79 /* DataModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				350F903C289FC5770033DE79 /* TableViewController.swift in Sources */,
 				350F901D289F0D9B0033DE79 /* SceneDelegate.swift in Sources */,
 				350F903A289FC05E0033DE79 /* Constants.swift in Sources */,
+				350F90C028A64BFA0033DE79 /* DataModel.xcdatamodeld in Sources */,
 				350F9036289FBF110033DE79 /* PhotoData.swift in Sources */,
 				350F9034289FBD650033DE79 /* CollectionViewController.swift in Sources */,
 			);
@@ -488,6 +492,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		350F90BE28A64BF90033DE79 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				350F90BF28A64BFA0033DE79 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 350F90BF28A64BFA0033DE79 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 350F900F289F0D9B0033DE79 /* Project object */;
 }
