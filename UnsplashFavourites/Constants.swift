@@ -9,7 +9,7 @@ import Foundation
 
 struct K {
     
-    static let accessKey = "RUWSWYK1LMGbK6SoF-RLseYuRh0E98O13MnvyniRtXM"
+    static let accessKey = "k0v-ObP7tdZ4H-ualcguGwdDX_asIBCQDvmUuMbG2Ek"
     
     static let identifierForCell = "CollectionCell"
     

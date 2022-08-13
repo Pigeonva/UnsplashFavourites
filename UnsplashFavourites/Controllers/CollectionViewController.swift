@@ -147,6 +147,7 @@ extension CollectionViewController {
         let detailVC = DetailViewController()
         detailVC.imageView.image = image
         detailVC.id = id
+        detailVC.collectionModel = DataModel(image: image, name: "", location: "", createAt: "", downloads: "")
         detailVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(detailVC, animated: true)
     }

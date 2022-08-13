@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct DataModel: Equatable {
+struct DataModel {
     
     let image: UIImage
     let name: String
