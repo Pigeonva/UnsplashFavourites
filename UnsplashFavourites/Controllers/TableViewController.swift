@@ -55,6 +55,8 @@ class TableViewController: UITableViewController {
         detailViewController.location.text = favouritesList[indexPath.row].location
         detailViewController.downloads.text = favouritesList[indexPath.row].downloads
         detailViewController.modalPresentationStyle = .fullScreen
+        detailViewController.model = favouritesList[indexPath.row]
+        detailViewController.models = favouritesList
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

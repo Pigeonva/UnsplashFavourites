@@ -12,6 +12,10 @@ class DetailViewController: UIViewController {
     var networkDataFetcher = NetworkDataFetcher()
     var id = String()
     
+    var model: DataModel?
+    
+    var models: [DataModel] = []
+    
     //MARK: - Create instances
     
     let imageView: UIImageView = {
@@ -100,12 +104,41 @@ class DetailViewController: UIViewController {
             let date = fetchedInfo.createdAt
             self.creatingDate.text = self.createCorrectDateFormat(dateJSON: date)
         }
+        checkSaving()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+//        let model = DataModel(image: imageView.image!, name: authorName.text!, location: location.text!, createAt: creatingDate.text!, downloads: downloads.text!)
+//        let navController = tabBarController?.viewControllers![1] as! UINavigationController
+//        let tableVC = navController.topViewController as! TableViewController
+        var counter = 0
+        for item in models {
+            if item.image == model?.image {
+                counter += 1
+            }
+        }
+        if counter == 0 {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupNavigationBar() {
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePressed))
+        navigationController?.navigationBar.tintColor = .black
     }
     
     @objc func savePressed() {
@@ -117,17 +150,27 @@ class DetailViewController: UIViewController {
         for item in tableVC.favouritesList {
             if item.image == model.image {
                 counter += 1
+            } else {
+                models.append(item)
             }
         }
         if counter == 0 {
             tableVC.favouritesList.append(model)
         }
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
-    private func setupNavigationBar() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePressed))
-        navigationController?.navigationBar.tintColor = .black
+    private func checkSaving() {
+        guard let safeModel = model else {return}
+        var counter = 0
+        for item in models {
+            if item == safeModel {
+                counter += 1
+            }
+            if counter != 0 {
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            }
+        }
     }
     
     private func setupUserInterface() {

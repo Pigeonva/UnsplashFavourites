@@ -15,9 +15,9 @@ struct K {
     
     static let identifierForTableCell = "TableCell"
     
-    static let collectionBackgroundColor = "collectionBackgroundColor"
+    static let likeButton = "heart"
     
-    static let tableBackgroundColor = "tableBackgroundColor"
+    static let unlikeButton = "heart.fill"
     
     static let collectionImage = "photo.stack"
     
