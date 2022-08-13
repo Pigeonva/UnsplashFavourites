@@ -14,7 +14,7 @@ class CustomTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints =  false
         imageView.backgroundColor = .clear
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .black
+        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 5
         return imageView
     }()
@@ -25,7 +25,7 @@ class CustomTableViewCell: UITableViewCell {
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
+//        label.adjustsFontSizeToFitWidth = true
         label.text = "Name"
         
         return label
@@ -37,7 +37,7 @@ class CustomTableViewCell: UITableViewCell {
         label.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
+//        label.adjustsFontSizeToFitWidth = true
         label.text = "Location"
         
         return label
@@ -90,12 +90,18 @@ class CustomTableViewCell: UITableViewCell {
         
         tableImageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
         tableImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        locationLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        secondStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        secondStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        locationLabel.heightAnchor.constraint(equalToConstant: 42).isActive = true
+        secondStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 3).isActive = true
+        secondStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -3).isActive = true
         secondStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         secondStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+    }
+    
+    func setCell(model: DataModel) {
+        tableImageView.image = model.image
+        nameLabel.text = model.name
+        locationLabel.text = model.location
     }
 
 }

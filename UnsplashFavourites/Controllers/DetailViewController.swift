@@ -110,7 +110,18 @@ class DetailViewController: UIViewController {
     
     @objc func savePressed() {
         
-        print("Save button pressed!!!")
+        let model = DataModel(image: imageView.image!, name: authorName.text!, location: location.text!, createAt: creatingDate.text!, downloads: downloads.text!)
+        let navController = tabBarController?.viewControllers![1] as! UINavigationController
+        let tableVC = navController.topViewController as! TableViewController
+        var counter = 0
+        for item in tableVC.favouritesList {
+            if item.image == model.image {
+                counter += 1
+            }
+        }
+        if counter == 0 {
+            tableVC.favouritesList.append(model)
+        }
     }
     
     private func setupNavigationBar() {
