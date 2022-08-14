@@ -14,7 +14,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: K.identifierForTableCell)
         tableView.rowHeight = 120
     }
@@ -58,5 +57,16 @@ class TableViewController: UITableViewController {
         detailViewController.tableModel = favouritesList[indexPath.row]
         detailViewController.models = favouritesList
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            favouritesList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

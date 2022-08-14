@@ -15,10 +15,6 @@ struct K {
     
     static let identifierForTableCell = "TableCell"
     
-    static let likeButton = "heart"
-    
-    static let unlikeButton = "heart.fill"
-    
     static let collectionImage = "photo.stack"
     
     static let tableImage = "heart.circle.fill"

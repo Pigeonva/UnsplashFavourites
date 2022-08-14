@@ -13,7 +13,6 @@ class DetailViewController: UIViewController {
     var id = String()
     var collectionModel: DataModel?
     var tableModel: DataModel?
-    
     var models: [DataModel] = []
     
     //MARK: - Create instances
@@ -107,16 +106,6 @@ class DetailViewController: UIViewController {
         checkTableSaving()
         checkCollectionSaving()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        checkCollectionSaving()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -131,6 +120,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func savePressed() {
+        
         guard let image = imageView.image, let name = authorName.text, let location = location.text, let downloads = downloads.text, let createAt = creatingDate.text else {return}
         let model = DataModel(image: image, name: name, location: location, createAt: createAt, downloads: downloads)
         let navController = tabBarController?.viewControllers![1] as! UINavigationController
