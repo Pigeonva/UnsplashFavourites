@@ -9,11 +9,13 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     var networkDataFetcher = NetworkDataFetcher()
     var id = String()
-    var collectionModel: DataModel?
-    var tableModel: DataModel?
-    var models: [DataModel] = []
+    var collectionModel: PhotoModel?
+    var tableModel: PhotoModel?
+    var models: [PhotoModel] = []
     
     //MARK: - Create instances
     
@@ -121,8 +123,15 @@ class DetailViewController: UIViewController {
     
     @objc func savePressed() {
         
-        guard let image = imageView.image, let name = authorName.text, let location = location.text, let downloads = downloads.text, let createAt = creatingDate.text else {return}
-        let model = DataModel(image: image, name: name, location: location, createAt: createAt, downloads: downloads)
+        guard let image = imageView.image?.pngData(), let name = authorName.text, let location = location.text, let downloads = downloads.text, let createAt = creatingDate.text else {return}
+        
+        let model = PhotoModel(context: context)
+        model.image = image
+        model.name = name
+        model.createAt = createAt
+        model.downloads = downloads
+        model.location = location
+
         let navController = tabBarController?.viewControllers![1] as! UINavigationController
         let tableVC = navController.topViewController as! TableViewController
         var counter = 0
@@ -135,6 +144,13 @@ class DetailViewController: UIViewController {
         }
         if counter == 0 {
             tableVC.favouritesList.append(model)
+            do {
+                try context.save()
+            }
+            catch  {
+                print("Error contex \(error)")
+            }
+            tableVC.tableView.reloadData()
         }
         navigationItem.rightBarButtonItem?.isEnabled = false
     }

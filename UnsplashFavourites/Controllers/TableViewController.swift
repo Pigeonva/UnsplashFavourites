@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
-    var favouritesList: [DataModel] = []
+    var favouritesList: [PhotoModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let detailViewController = DetailViewController()
-        detailViewController.imageView.image = favouritesList[indexPath.row].image
+        detailViewController.imageView.image = UIImage(data: favouritesList[indexPath.row].image!)
         detailViewController.authorName.text = favouritesList[indexPath.row].name
         detailViewController.creatingDate.text = favouritesList[indexPath.row].createAt
         detailViewController.location.text = favouritesList[indexPath.row].location

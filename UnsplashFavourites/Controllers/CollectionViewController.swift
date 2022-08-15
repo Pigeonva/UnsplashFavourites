@@ -9,6 +9,8 @@ import UIKit
 
 class CollectionViewController: UICollectionViewController {
     
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     var searchController = UISearchController()
     var timer: Timer?
     var networkDataFetcher = NetworkDataFetcher()
@@ -142,12 +144,15 @@ extension CollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.cellForItem(at: indexPath) as! CustomCollectionViewCell
-        guard let image = cell.photoImageView.image else {return}
+        guard let image = cell.photoImageView.image?.pngData() else {return}
         let id = photos[indexPath.item].id
         let detailVC = DetailViewController()
-        detailVC.imageView.image = image
+        detailVC.imageView.image = UIImage(data: image)
         detailVC.id = id
-        detailVC.collectionModel = DataModel(image: image, name: "", location: "", createAt: "", downloads: "")
+        
+        let model = PhotoModel(context: context)
+        model.image = image; model.name = ""; model.downloads = ""; model.createAt = ""; model.location = ""
+        detailVC.collectionModel = model
         detailVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(detailVC, animated: true)
     }

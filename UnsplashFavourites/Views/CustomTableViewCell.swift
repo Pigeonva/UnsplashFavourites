@@ -98,8 +98,8 @@ class CustomTableViewCell: UITableViewCell {
         secondStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
     }
     
-    func setCell(model: DataModel) {
-        tableImageView.image = model.image
+    func setCell(model: PhotoModel) {
+        tableImageView.image = UIImage(data: model.image!)
         nameLabel.text = model.name
         locationLabel.text = model.location
     }
