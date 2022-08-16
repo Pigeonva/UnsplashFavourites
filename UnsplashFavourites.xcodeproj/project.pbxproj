@@ -19,9 +19,11 @@
 		350F903E289FC8670033DE79 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F903D289FC8670033DE79 /* CustomTableViewCell.swift */; };
 		350F904528A0028C0033DE79 /* NetworkSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F904428A0028C0033DE79 /* NetworkSevice.swift */; };
 		350F904728A002B00033DE79 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F904628A002B00033DE79 /* NetworkDataFetcher.swift */; };
-		350F909728A28E250033DE79 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F909628A28E250033DE79 /* DetailViewController.swift */; };
+		350F909728A28E250033DE79 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F909628A28E250033DE79 /* DetailCollectionViewController.swift */; };
 		350F909B28A3EDFD0033DE79 /* InfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350F909A28A3EDFD0033DE79 /* InfoData.swift */; };
 		350F90C028A64BFA0033DE79 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 350F90BE28A64BF90033DE79 /* DataModel.xcdatamodeld */; };
+		351B9C6828ABE06900F228E5 /* GeneralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B9C6728ABE06800F228E5 /* GeneralModel.swift */; };
+		351B9C6A28AC019A00F228E5 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351B9C6928AC019A00F228E5 /* DetailTableViewController.swift */; };
 		6F1E9AD556B01FF4ED55DC6C /* Pods_UnsplashFavourites.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9D7EAE7816D50CF95A0AC95 /* Pods_UnsplashFavourites.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +42,11 @@
 		350F903D289FC8670033DE79 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		350F904428A0028C0033DE79 /* NetworkSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSevice.swift; sourceTree = "<group>"; };
 		350F904628A002B00033DE79 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
-		350F909628A28E250033DE79 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		350F909628A28E250033DE79 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		350F909A28A3EDFD0033DE79 /* InfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoData.swift; sourceTree = "<group>"; };
 		350F90BF28A64BFA0033DE79 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		351B9C6728ABE06800F228E5 /* GeneralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralModel.swift; sourceTree = "<group>"; };
+		351B9C6928AC019A00F228E5 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 		59142F1ACCAB0DD24E01CD72 /* Pods-UnsplashFavourites.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashFavourites.release.xcconfig"; path = "Target Support Files/Pods-UnsplashFavourites/Pods-UnsplashFavourites.release.xcconfig"; sourceTree = "<group>"; };
 		C6DCAC5A504E424488D939BE /* Pods-UnsplashFavourites.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashFavourites.debug.xcconfig"; path = "Target Support Files/Pods-UnsplashFavourites/Pods-UnsplashFavourites.debug.xcconfig"; sourceTree = "<group>"; };
 		D9D7EAE7816D50CF95A0AC95 /* Pods_UnsplashFavourites.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnsplashFavourites.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +104,8 @@
 			children = (
 				350F9033289FBD650033DE79 /* CollectionViewController.swift */,
 				350F903B289FC5770033DE79 /* TableViewController.swift */,
-				350F909628A28E250033DE79 /* DetailViewController.swift */,
+				350F909628A28E250033DE79 /* DetailCollectionViewController.swift */,
+				351B9C6928AC019A00F228E5 /* DetailTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 				350F9035289FBF110033DE79 /* PhotoData.swift */,
 				350F909A28A3EDFD0033DE79 /* InfoData.swift */,
 				350F90BE28A64BF90033DE79 /* DataModel.xcdatamodeld */,
+				351B9C6728ABE06800F228E5 /* GeneralModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,12 +274,14 @@
 				350F904528A0028C0033DE79 /* NetworkSevice.swift in Sources */,
 				350F904728A002B00033DE79 /* NetworkDataFetcher.swift in Sources */,
 				350F909B28A3EDFD0033DE79 /* InfoData.swift in Sources */,
-				350F909728A28E250033DE79 /* DetailViewController.swift in Sources */,
+				351B9C6828ABE06900F228E5 /* GeneralModel.swift in Sources */,
+				350F909728A28E250033DE79 /* DetailCollectionViewController.swift in Sources */,
 				350F9038289FC03A0033DE79 /* CustomCollectionViewCell.swift in Sources */,
 				350F901B289F0D9B0033DE79 /* AppDelegate.swift in Sources */,
 				350F903C289FC5770033DE79 /* TableViewController.swift in Sources */,
 				350F901D289F0D9B0033DE79 /* SceneDelegate.swift in Sources */,
 				350F903A289FC05E0033DE79 /* Constants.swift in Sources */,
+				351B9C6A28AC019A00F228E5 /* DetailTableViewController.swift in Sources */,
 				350F90C028A64BFA0033DE79 /* DataModel.xcdatamodeld in Sources */,
 				350F9036289FBF110033DE79 /* PhotoData.swift in Sources */,
 				350F9034289FBD650033DE79 /* CollectionViewController.swift in Sources */,

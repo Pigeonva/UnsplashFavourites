@@ -21,7 +21,7 @@ class TableViewController: UITableViewController {
 
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: K.identifierForTableCell)
         tableView.rowHeight = 120
-//        loadData()
+        loadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,14 +53,14 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let detailViewController = DetailViewController()
-        detailViewController.imageView.image = UIImage(data: favouritesList[indexPath.row].image!)
-        detailViewController.authorName.text = favouritesList[indexPath.row].name
-        detailViewController.creatingDate.text = favouritesList[indexPath.row].createAt
-        detailViewController.location.text = favouritesList[indexPath.row].location
-        detailViewController.downloads.text = favouritesList[indexPath.row].downloads
-        detailViewController.modalPresentationStyle = .fullScreen
-        navigationController?.pushViewController(detailViewController, animated: true)
+        let tableDetailViewController = DetailTableViewController()
+        tableDetailViewController.imageView.image = UIImage(data: favouritesList[indexPath.row].image!)
+        tableDetailViewController.authorName.text = favouritesList[indexPath.row].name
+        tableDetailViewController.creatingDate.text = favouritesList[indexPath.row].createAt
+        tableDetailViewController.location.text = favouritesList[indexPath.row].location
+        tableDetailViewController.downloads.text = favouritesList[indexPath.row].downloads
+        tableDetailViewController.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(tableDetailViewController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

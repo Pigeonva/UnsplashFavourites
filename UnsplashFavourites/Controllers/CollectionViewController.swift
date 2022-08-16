@@ -146,7 +146,7 @@ extension CollectionViewController {
         let cell = collectionView.cellForItem(at: indexPath) as! CustomCollectionViewCell
         guard let image = cell.photoImageView.image?.pngData() else {return}
         let id = photos[indexPath.item].id
-        let detailVC = DetailViewController()
+        let detailVC = DetailCollectionViewController()
         detailVC.imageView.image = UIImage(data: image)
         detailVC.id = id
         detailVC.modalPresentationStyle = .fullScreen

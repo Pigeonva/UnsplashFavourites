@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  DetailCollectionViewController.swift
 //  UnsplashFavourites
 //
 //  Created by Артур Фомин on 09.08.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailCollectionViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var networkDataFetcher = NetworkDataFetcher()
@@ -93,16 +93,7 @@ class DetailViewController: UIViewController {
         setupNavigationBar()
         setupUserInterface()
         setConstraints()
-        networkDataFetcher.fetchImages(id: id) { infoData in
-            guard let fetchedInfo = infoData else {return}
-            self.downloads.text = "Downloads: \(String(fetchedInfo.downloads))"
-            self.authorName.text = "by \(fetchedInfo.user.name)"
-            self.location.text = fetchedInfo.location.name ?? "Somewhere in the Earth"
-            let date = fetchedInfo.createdAt
-            self.creatingDate.text = self.createCorrectDateFormat(dateJSON: date)
-        }
-//        checkTableSaving()
-//        checkCollectionSaving()
+        getInfo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -112,30 +103,39 @@ class DetailViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePressed))
+        let navVC = tabBarController?.viewControllers?[1] as! UINavigationController
+        let tableVC  = navVC.topViewController as! TableViewController
+        var counter = 0
+        tableVC.favouritesList.forEach { item in
+            if item.image == imageView.image?.pngData() {
+                counter += 1
+            }
+        }
+        if counter == 0 {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePressed))
+        }
         navigationController?.navigationBar.tintColor = .black
+        
     }
     
     @objc func savePressed() {
         
-        let model = PhotoModel()
+        let model = PhotoModel(context: context)
         model.image = imageView.image?.pngData()
         model.createAt = creatingDate.text
         model.downloads = downloads.text
         model.name = authorName.text
         model.location = location.text
         
-        
+        let navVC = tabBarController?.viewControllers?[1] as! UINavigationController
+        let tableVC  = navVC.topViewController as! TableViewController
+        tableVC.favouritesList.append(model)
+        do {
+            try context.save()
+        } catch  {
+            print("\(error)")
+        }
         navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-    
-    private func checkTableSaving() {
-    
-    }
-    
-    private func checkCollectionSaving() {
-        
     }
     
     private func setupUserInterface() {
@@ -148,6 +148,18 @@ class DetailViewController: UIViewController {
         secondStackView.addArrangedSubview(imageView)
         secondStackView.addArrangedSubview(firstStackView)
         view.addSubview(secondStackView)
+    }
+    
+    private func getInfo() {
+        
+        networkDataFetcher.fetchImages(id: id) { infoData in
+            guard let fetchedInfo = infoData else {return}
+            self.downloads.text = "Downloads: \(String(fetchedInfo.downloads))"
+            self.authorName.text = "by \(fetchedInfo.user.name)"
+            self.location.text = fetchedInfo.location.name ?? "Somewhere in the Earth"
+            let date = fetchedInfo.createdAt
+            self.creatingDate.text = self.createCorrectDateFormat(dateJSON: date)
+        }
     }
     
     //MARK: - CreateCorrectDateFormat
