@@ -69,6 +69,12 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            context.delete(favouritesList[indexPath.row])
+            do {
+                try context.save()
+            } catch  {
+                print("\(error)")
+            }
             favouritesList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
