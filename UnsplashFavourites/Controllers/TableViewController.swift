@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class TableViewController: UITableViewController {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let request: NSFetchRequest<PhotoModel> = PhotoModel.fetchRequest()
 
     var favouritesList: [PhotoModel] = []
 
@@ -16,6 +21,7 @@ class TableViewController: UITableViewController {
 
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: K.identifierForTableCell)
         tableView.rowHeight = 120
+//        loadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -54,8 +60,6 @@ class TableViewController: UITableViewController {
         detailViewController.location.text = favouritesList[indexPath.row].location
         detailViewController.downloads.text = favouritesList[indexPath.row].downloads
         detailViewController.modalPresentationStyle = .fullScreen
-        detailViewController.tableModel = favouritesList[indexPath.row]
-        detailViewController.models = favouritesList
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
@@ -69,4 +73,14 @@ class TableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    func loadData() {
+        
+        do {
+         favouritesList = try context.fetch(request)
+        } catch {
+            print("Error fatching \(error)")
+        }
+    }
 }
+

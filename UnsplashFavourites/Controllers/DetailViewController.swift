@@ -10,12 +10,8 @@ import UIKit
 class DetailViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     var networkDataFetcher = NetworkDataFetcher()
     var id = String()
-    var collectionModel: PhotoModel?
-    var tableModel: PhotoModel?
-    var models: [PhotoModel] = []
     
     //MARK: - Create instances
     
@@ -105,8 +101,8 @@ class DetailViewController: UIViewController {
             let date = fetchedInfo.createdAt
             self.creatingDate.text = self.createCorrectDateFormat(dateJSON: date)
         }
-        checkTableSaving()
-        checkCollectionSaving()
+//        checkTableSaving()
+//        checkCollectionSaving()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,69 +119,23 @@ class DetailViewController: UIViewController {
     
     @objc func savePressed() {
         
-        guard let image = imageView.image?.pngData(), let name = authorName.text, let location = location.text, let downloads = downloads.text, let createAt = creatingDate.text else {return}
+        let model = PhotoModel()
+        model.image = imageView.image?.pngData()
+        model.createAt = creatingDate.text
+        model.downloads = downloads.text
+        model.name = authorName.text
+        model.location = location.text
         
-        let model = PhotoModel(context: context)
-        model.image = image
-        model.name = name
-        model.createAt = createAt
-        model.downloads = downloads
-        model.location = location
-
-        let navController = tabBarController?.viewControllers![1] as! UINavigationController
-        let tableVC = navController.topViewController as! TableViewController
-        var counter = 0
-        for item in tableVC.favouritesList {
-            if item.image == model.image {
-                counter += 1
-            } else {
-                models.append(item)
-            }
-        }
-        if counter == 0 {
-            tableVC.favouritesList.append(model)
-            do {
-                try context.save()
-            }
-            catch  {
-                print("Error contex \(error)")
-            }
-            tableVC.tableView.reloadData()
-        }
+        
         navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     private func checkTableSaving() {
-        guard let safeModel = tableModel else {return}
-        var counter = 0
-        for item in models {
-            if item.image == safeModel.image {
-                counter += 1
-            }
-            if counter != 0 {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            }
-        }
+    
     }
     
     private func checkCollectionSaving() {
-        guard let safeModel = collectionModel else {return}
-        let navController = tabBarController?.viewControllers![1] as! UINavigationController
-        let tableVC = navController.topViewController as! TableViewController
-        var counter = 0
-        print("\(tableVC.favouritesList)")
-        for item in tableVC.favouritesList {
-            if item.image == safeModel.image {
-                counter += 1
-            }
-            if counter != 0 {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            }
-        }
+        
     }
     
     private func setupUserInterface() {
