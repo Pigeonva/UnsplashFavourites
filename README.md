@@ -2,6 +2,7 @@
 Hey everyone! This app created to search and collect beautiful photos from Unsplash.
 
 When you open the app firstly you can see collection of random photos. (maybe there is one photo you want to find all your life)
+
 <img src="https://user-images.githubusercontent.com/77341488/185055777-dc6e920d-66df-4f45-9089-ef43bc90219b.png" width="200" height="400" />   
 If there in't any liked photos you can search it simply writing key word on search bar. Tapping on liked photo you get in detail information screen 
 and know who is author of the most beautiful photo in the world and finally save it on your own collection to watch it before sleep and see dreams about 
